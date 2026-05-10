@@ -1,0 +1,34 @@
+name: CatCafé CI
+
+on:
+    push:
+        branches: [ "master" ]
+    pull_request:
+        branches: [ "master" ]
+
+jobs:
+    build-test-format:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Code auschecken
+              uses: actions/checkout@v4
+
+            - name: JDK 25 einrichten
+              uses: actions/setup-java@v4
+              with:
+                  java-version: '25'
+                  distribution: 'temurin'
+                  cache: gradle
+
+            - name: Berechtigungen für Gradlew setzen
+              run: chmod +x gradlew
+
+            - name: Projekt bauen
+              run: ./gradlew assemble
+
+            - name: Tests ausführen
+              run: ./gradlew test
+
+            - name: Prüfen mit Spotless
+              run: ./gradlew spotlessCheck
