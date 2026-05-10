@@ -1,6 +1,7 @@
 package catcafe;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -119,8 +120,10 @@ class CatCafeTest {
     @Test
     void shouldThrowExceptionWhenAddingNullCat() {
         // When/Then: Adding null should throw NullPointerException
-        assertThrows(NullPointerException.class, () -> {
-            cafe.addCat(null);
-        });
+        assertThrows(
+                NullPointerException.class,
+                () -> {
+                    cafe.addCat(null);
+                });
     }
 }
